@@ -2,9 +2,9 @@
 
 # Loki Peek
 
-Sample React application to perform minimal [LogQL](https://github.com/grafana/loki/blob/master/docs/api.md) queries [Loki](https://github.com/grafana/loki), inspired by Grafana Explorer.
+Sample React application to perform minimal [LogQL](https://github.com/grafana/loki/blob/master/docs/api.md) queries to [Loki](https://github.com/grafana/loki), loosely inspired by Grafana Explorer.
 
-![ezgif com-optimize 18](https://user-images.githubusercontent.com/1423657/50742077-b5c1ee00-1206-11e9-9b2e-1ec4376a9198.gif)
+![ezgif com-optimize 19](https://user-images.githubusercontent.com/1423657/50743191-2a9c2480-1215-11e9-9c39-1e9890fbd960.gif)
 
 ## Available Scripts
 
