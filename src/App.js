@@ -125,7 +125,7 @@ class App extends Component {
     <div className="App">
 
       <div style={search}>
-        <div style={logo}>Peek-Loki</div>
+        <div style={logo}>Loki-Peek</div>
 	<DateTimeRangePicker
           onChange={this.onDateChange}
 	  onSubmit={event => this.onSubmit(event)}
