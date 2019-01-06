@@ -2,7 +2,7 @@
 
 # REACT-LOKI-SEARCH
 
-Nothing to see here.
+Sample React application to perform minimal [LogQL](https://github.com/grafana/loki/blob/master/docs/api.md) queries [Loki](https://github.com/grafana/loki), inspired by Grafana Explorer.
 
 ![ezgif com-optimize 18](https://user-images.githubusercontent.com/1423657/50742077-b5c1ee00-1206-11e9-9b2e-1ec4376a9198.gif)
 
