@@ -8,12 +8,15 @@ import './App.css';
 import DateTimeRangePicker from '@wojtekmaj/react-datetimerange-picker';
 import proxiedFetch from 'proxied-fetch';
 
+import Highlight from 'react-highlighter';
+
 class App extends Component {
   constructor() {
     super();
     this.state = {
       loading: false,
       searchText: '',
+      searchRegex: '',
       searchServer: process.env.API || 'http://127.0.0.1:3100',
       guess: '',
       date: [new Date(), new Date()],
@@ -73,6 +76,7 @@ class App extends Component {
     var {searchServer} = this.state;
     var dates = this.state.date;
     var parsed =  this.parseQuery(searchText);
+    this.setState({searchRegex: parsed.regexp});
     const time = '&start=' + dates[0].getTime() + '000000' + '&end=' + dates[1].getTime() + '000000';
     const url = `${searchServer}/api/prom/query?query=${parsed.query}&regexp=${parsed.regexp}` + time;
     proxiedFetch(url)
@@ -144,7 +148,7 @@ class App extends Component {
 	    </div>
         </div>
 	{isLoading}
-        <UsersList streams={this.state.streams}/>
+        <UsersList streams={this.state.streams} regex={this.state.searchRegex}/>
       </div>
     </div>
     );
@@ -155,13 +159,14 @@ class App extends Component {
 class UsersList extends React.Component {
   get streams() {
     try {
+        const regex = this.props.regex;
     	return this.props.streams.map(function (stream) {
     	    return stream.entries.map(function (entry) {
-    	      	return <User ts={entry.ts} line={entry.line}/>
+    	      	return <User ts={entry.ts} line={entry.line} regex={regex}/>
     	    });
     	});
     } catch(e) {
-		return <User ts="" line="No Results"/>
+		return <User ts="" line="No Results" regex={this.props.regex}/>
     }
   }
 
@@ -184,6 +189,7 @@ class UsersList extends React.Component {
 
 
 class User extends React.Component {
+
   render() {
     const searchUser = {
       display: 'flex',
@@ -209,7 +215,7 @@ class User extends React.Component {
 
     return (
         <div style={searchUser}>
-          <p>{this.props.ts}: {this.props.line}</p>
+          <p>{this.props.ts}: <Highlight search={this.props.regex}>{this.props.line}</Highlight> [{this.props.regex}]</p>
         </div>
     )
   }
