@@ -1,6 +1,6 @@
 <img src='https://user-images.githubusercontent.com/1423657/50455638-a8c41580-094f-11e9-8b43-dd0a9ae0f622.png' width=100>
 
-# REACT-LOKI-SEARCH
+# Loki Peek
 
 Sample React application to perform minimal [LogQL](https://github.com/grafana/loki/blob/master/docs/api.md) queries [Loki](https://github.com/grafana/loki), inspired by Grafana Explorer.
 
