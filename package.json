@@ -6,6 +6,7 @@
     "@wojtekmaj/react-datetimerange-picker": "^2.0.1",
     "proxied-fetch": "^1.0.11",
     "react": "^16.7.0",
+    "react-autocomplete": "^1.8.1",
     "react-dom": "^16.7.0",
     "react-scripts": "2.1.3"
   },

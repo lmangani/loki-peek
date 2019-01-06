@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+//import Autocomplete from  'react-autocomplete';
+//import { getStocks, matchStocks } from './labels';
+
 import DateTimeRangePicker from '@wojtekmaj/react-datetimerange-picker';
 import proxiedFetch from 'proxied-fetch';
 
@@ -9,10 +12,14 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
+      loading: false,
       searchText: '',
       searchServer: process.env.API || 'http://127.0.0.1:3100',
+      guess: '',
       date: [new Date(), new Date()],
-      streams: []
+      streams: [],
+      labels: [],
+      values: []
     };
   }
 
@@ -30,17 +37,38 @@ class App extends Component {
     	return { query, regexp };
   }
 
-  onDateChange = date => this.setState({ date })
+
+  getLabels() {
+    var {searchServer} = this.state;
+    const url = `${searchServer}/api/prom/label`;
+    proxiedFetch(url)
+      .then(response => response.json())
+      .then(responseJson => this.setState({labels: responseJson.values}))
+      .catch(function(error) { console.log(error) });
+  }
+
+  getLabelValues(label) {
+    var {searchServer} = this.state;
+    const url = `${searchServer}/api/prom/label/${label}/values`
+    proxiedFetch(url)
+      .then(response => response.json())
+      .then(responseJson => this.setState({values: responseJson.values}))
+      .catch(function(error) { console.log(error) });
+  }
+
+  onDateChange = date => { this.setState({ date }); this.onSubmit() }
 
   onChangeHandle(event) {
     this.setState({searchText: event.target.value});
   }
   onChangeServer(event) {
+    event.preventDefault();
+    this.getLabels()
     this.setState({searchServer: event.target.value});
   }
 
   onSubmit(event) {
-    event.preventDefault();
+    if(event) event.preventDefault();
     var {searchText} = this.state;
     var {searchServer} = this.state;
     var dates = this.state.date;
@@ -52,7 +80,6 @@ class App extends Component {
       .then(responseJson => this.setState({streams: responseJson.streams}))
       .catch(function(error) { console.log(error) });
   }
-
 
 
   render() {
@@ -80,17 +107,20 @@ class App extends Component {
       padding: "10px"
     }
 
+    let isLoading = this.loading ? "Loading...." : ""
 
     return (
     <div className="App">
+
       <div style={search}>
 	<DateTimeRangePicker
           onChange={this.onDateChange}
+	  onSubmit={event => this.onSubmit(event)}
           value={this.state.date}
         />
         <div>
 	    <div className="float" style={left}>
-	        <form style={searchGit}>
+	        <form style={searchGit} onSubmit={event => true }>
 	          <label htmlFor="searchServer">Server </label>
 	          <input
 	            type="text"
@@ -109,9 +139,11 @@ class App extends Component {
 	            onChange={event => this.onChangeHandle(event)}
 	            value={this.state.searchText}
 		    className="searchForm"/>
+		    <button>Search</button>
 	        </form>
 	    </div>
         </div>
+	{isLoading}
         <UsersList streams={this.state.streams}/>
       </div>
     </div>
