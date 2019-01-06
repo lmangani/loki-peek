@@ -1,6 +1,6 @@
 {
-  "name": "loki-search",
-  "version": "0.1.1",
+  "name": "loki-peek",
+  "version": "0.1.2",
   "private": true,
   "dependencies": {
     "@wojtekmaj/react-datetimerange-picker": "^2.0.1",
