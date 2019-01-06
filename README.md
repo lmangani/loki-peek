@@ -4,7 +4,7 @@
 
 Nothing to see here.
 
-![ezgif com-optimize 17](https://user-images.githubusercontent.com/1423657/50742013-c9208980-1205-11e9-93cd-baa53915dfe6.gif)
+![ezgif com-optimize 18](https://user-images.githubusercontent.com/1423657/50742077-b5c1ee00-1206-11e9-9b2e-1ec4376a9198.gif)
 
 ## Available Scripts
 
