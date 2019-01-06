@@ -94,6 +94,14 @@ class App extends Component {
     const right = {
       width: "80%"
     }
+
+    const logo = {
+      float: "left",
+      position: "absolute",
+      marginLeft: "10px",
+      fontWeight: "bold"
+    }
+
     const search = {
       margin: "auto",
       fontSize: "18px",
@@ -117,6 +125,7 @@ class App extends Component {
     <div className="App">
 
       <div style={search}>
+        <div style={logo}>Peek-Loki</div>
 	<DateTimeRangePicker
           onChange={this.onDateChange}
 	  onSubmit={event => this.onSubmit(event)}
@@ -131,7 +140,7 @@ class App extends Component {
 	            id="searchServer"
 	            value={this.state.searchServer}
 	            onChange={event => this.onChangeServer(event)}
-		    className="searchForm"/>
+		    className="searchForm formField"/>
 	        </form>
 	    </div>
 	    <div className="float" style={right}>
@@ -142,12 +151,11 @@ class App extends Component {
 	            id="searchTextForm"
 	            onChange={event => this.onChangeHandle(event)}
 	            value={this.state.searchText}
-		    className="searchForm"/>
+		    className="searchForm formField"/>
 		    <button>Search</button>
 	        </form>
 	    </div>
         </div>
-	{isLoading}
         <UsersList streams={this.state.streams} regex={this.state.searchRegex}/>
       </div>
     </div>
@@ -180,9 +188,11 @@ class UsersList extends React.Component {
     }
 
     return (
-      <div style={searchResult}>
+
+      <div class="logs-rows">
         {this.streams}
       </div>
+
     )
   }
 }
@@ -214,9 +224,14 @@ class User extends React.Component {
     }
 
     return (
-        <div style={searchUser}>
-          <p>{this.props.ts}: <Highlight search={this.props.regex}>{this.props.line}</Highlight> [{this.props.regex}]</p>
+
+      <div class="logs-row">
+        <div class="logs-row__level logs-row__level--info"></div>
+        <div class="logs-row__time" title="{this.props.ts}">{this.props.ts}</div>
+        <div class="logs-row__message"><span><span class=""> <Highlight search={this.props.regex}>{this.props.line}</Highlight></span></span>
         </div>
+      </div>
+
     )
   }
 }

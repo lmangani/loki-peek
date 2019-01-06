@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  color: #171819;
+  font-family: Roboto,Helvetica,Arial,sans-serif;
 }
 
 .App-logo {
@@ -46,10 +48,6 @@
 }
 
 
-
-
-
-
 .example {
   padding: 0 25px;
 }
@@ -87,4 +85,115 @@ code {
   background-color: #eeeeee;
   color: #454545;
   font-weight: bold;
+}
+
+.explore-background {
+  font-family: Roboto,Helvetica,Arial,sans-serif;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #d8d9da;
+  background-color: #171819;
+  width: 100%;
+}
+
+.logs-rows {
+    font-family: Menlo,Monaco,Consolas,Courier New,monospace;
+    font-size: 12px;
+    display: table;
+    table-layout: fixed;
+    color: #d8d9da;
+    background-color: #171819;
+    padding-top: 5px;
+}
+
+.logs-row {
+    display: table-row;
+    background-color: #262729;
+}
+
+.logs-row>div {
+    display: table-cell;
+    padding-right: 10px;
+    vertical-align: top;
+    border-top: 1px solid transparent;
+    border-bottom: 1px solid transparent;
+}
+
+.logs-row>div {
+    display: table-cell;
+    padding-right: 10px;
+    vertical-align: top;
+    border-top: 1px solid transparent;
+    border-bottom: 1px solid transparent;
+}
+
+.logs-row>div {
+    display: table-cell;
+    padding-right: 10px;
+    vertical-align: top;
+    border-top: 1px solid transparent;
+    border-bottom: 1px solid transparent;
+    text-align: left;
+}
+
+.logs-row__message {
+    word-break: break-all;
+    min-width: 80%;
+}
+
+.logs-row__time {
+    white-space: nowrap;
+}
+
+.logs-row__level {
+    position: relative;
+}
+
+.logs-panel-meta {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    color: #8e8e8e;
+    margin-bottom: 10px;
+    min-width: 30%;
+}
+
+
+body {
+    font-family: Roboto,Helvetica,Arial,sans-serif;
+    font-size: 13px;
+    line-height: 1.5;
+    color: #d8d9da;
+    background-color: #171819;
+    width: 100%;
+    position: absolute;
+}
+
+
+.formField {
+    position: relative;
+    display: inline-block;
+    padding: 6px 7px 4px;
+    width: 100%;
+    cursor: text;
+    line-height: 1.5;
+    color: #d8d9da;
+    background-color: #09090b;
+    background-image: none;
+    border: 1px solid #141414;
+    border-radius: 3px;
+    transition: all .3s;
+}
+
+.react-datetimerange-picker {
+    display: inline;
+    position: relative;
+    float: right;
+    margin-left: auto;
+    margin-right: 0;
+}
+
+.react-datetimerange-picker__wrapper {
+    display: flex;
+    border: none;
 }
