@@ -4,6 +4,10 @@
 
 Sample React application to perform minimal [LogQL](https://github.com/grafana/loki/blob/master/docs/api.md) queries to [Loki](https://github.com/grafana/loki), loosely inspired by Grafana Explorer.
 
+#### Status
+* Insecure Fetch - Do not use this as-is!
+* Barebone. _Join in, fellow contributors!_
+
 ![ezgif com-optimize 19](https://user-images.githubusercontent.com/1423657/50743191-2a9c2480-1215-11e9-9c39-1e9890fbd960.gif)
 
 ## Available Scripts
