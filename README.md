@@ -4,8 +4,7 @@
 
 Nothing to see here.
 
-![image](https://user-images.githubusercontent.com/1423657/50740674-21e62700-11f2-11e9-8e23-cd768cb2357d.png)
-
+![ezgif com-optimize 17](https://user-images.githubusercontent.com/1423657/50742013-c9208980-1205-11e9-93cd-baa53915dfe6.gif)
 
 ## Available Scripts
 
