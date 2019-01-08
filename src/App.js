@@ -10,16 +10,17 @@ import proxiedFetch from 'proxied-fetch';
 
 import Highlight from 'react-highlighter';
 
+var urlParams = new URLSearchParams(window.location.search);
+
 class App extends Component {
   constructor() {
     super();
     this.state = {
       loading: false,
-      searchText: '',
-      searchRegex: '',
-      searchServer: process.env.API || 'http://127.0.0.1:3100',
-      guess: '',
-      date: [new Date(), new Date()],
+      searchText: urlParams.has('query') ? urlParams.get('query') : '',
+      searchRegex: urlParams.has('regex') ? urlParams.get('regex') : '',
+      searchServer: process.env.API || urlParams.has('api') ? urlParams.get('api') : 'http://127.0.0.1:3100',
+      date: [ new Date(), new Date()],
       streams: [],
       labels: [],
       values: []
@@ -36,7 +37,7 @@ class App extends Component {
 	    query = match[0].trim();
 	    regexp = input.replace(selectorRegexp, '').trim();
 	  }
-	console.log(query,regexp)
+	// console.log(query,regexp)
     	return { query, regexp };
   }
 
@@ -59,15 +60,21 @@ class App extends Component {
       .catch(function(error) { console.log(error) });
   }
 
-  onDateChange = date => { this.setState({ date }); this.onSubmit() }
+  onDateChange = date => { 
+	this.setState({ date }); this.onSubmit() 
+	urlParams.set('start', this.state.date[0].getTime() + '000000');
+	urlParams.set('end',   this.state.date[1].getTime() + '000000');
+  }
 
   onChangeHandle(event) {
     this.setState({searchText: event.target.value});
+	urlParams.set('query', event.target.value);
   }
   onChangeServer(event) {
     event.preventDefault();
     this.getLabels()
     this.setState({searchServer: event.target.value});
+	urlParams.set('api', event.target.value);
   }
 
   onSubmit(event) {
@@ -76,7 +83,7 @@ class App extends Component {
     var {searchServer} = this.state;
     var dates = this.state.date;
     var parsed =  this.parseQuery(searchText);
-    this.setState({searchRegex: parsed.regexp});
+    if (parsed.regexp) this.setState({searchRegex: parsed.regexp});
     const time = '&start=' + dates[0].getTime() + '000000' + '&end=' + dates[1].getTime() + '000000';
     const url = `${searchServer}/api/prom/query?query=${parsed.query}&regexp=${parsed.regexp}` + time;
     proxiedFetch(url)
