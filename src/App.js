@@ -20,6 +20,7 @@ class App extends Component {
       searchText: urlParams.has('query') ? urlParams.get('query') : '',
       searchRegex: urlParams.has('regex') ? urlParams.get('regex') : '',
       searchServer: process.env.API || urlParams.has('api') ? urlParams.get('api') : 'http://127.0.0.1:3100',
+      searchLimit: urlParams.has('limit') ? urlParams.get('limit') : '',
       date: [ new Date(), new Date()],
       streams: [],
       labels: [],
@@ -81,11 +82,12 @@ class App extends Component {
     if(event) event.preventDefault();
     var {searchText} = this.state;
     var {searchServer} = this.state;
+    var {searchLimit} = this.state;
     var dates = this.state.date;
     var parsed =  this.parseQuery(searchText);
     if (parsed.regexp) this.setState({searchRegex: parsed.regexp});
     const time = '&start=' + dates[0].getTime() + '000000' + '&end=' + dates[1].getTime() + '000000';
-    const url = `${searchServer}/api/prom/query?query=${parsed.query}&regexp=${parsed.regexp}` + time;
+    const url = `${searchServer}/api/prom/query?query=${parsed.query}&regexp=${parsed.regexp}&limit=${searchLimit}` + time;
     proxiedFetch(url)
       .then(response => response.json())
       .then(responseJson => this.setState({streams: responseJson.streams}))
